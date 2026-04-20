@@ -852,11 +852,36 @@
     el.classList.add('selected');
   }
 
-  function handlePayment() {
-    // Save form data to sessionStorage so we can retrieve it after payment
-    sessionStorage.setItem('nobleOrderAudit', JSON.stringify(formData));
-    // Redirect to Stripe Payment Link
-    window.location.href = 'https://buy.stripe.com/7sY6oJ1Pmh0Q0xB5ZE2go00';
+  async function handlePayment() {
+    const btn = document.getElementById('pay-btn');
+    btn.innerHTML = '<span class="spinner"></span>Submitting...';
+    btn.disabled = true;
+
+    try {
+      await fetch('https://formspree.io/f/mdaydzvw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          age: formData.age,
+          email: formData.email,
+          life_stage: formData.lifeStage,
+          holding_back: formData.holdingBack,
+          struggles: formData.struggles ? formData.struggles.join(', ') : 'none selected',
+          discipline_rating: formData.discipline,
+          purpose_rating: formData.purpose,
+          vision: formData.vision,
+          priority: formData.priority,
+          already_tried: formData.tried,
+          seriousness_rating: formData.seriousness,
+          _subject: 'New Noble Protocol Submission — ' + formData.name
+        })
+      });
+    } catch(e) {
+      console.log('Form submit error:', e);
+    }
+
+    window.location.href = 'https://buy.stripe.com/test_9B65kD25A32Sgs13m13oA00';
   }
 </script>
 </body>
