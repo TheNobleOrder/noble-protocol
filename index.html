@@ -739,7 +739,7 @@
 
     <div class="nav">
       <button class="btn-back" onclick="goBack(4)">← Back</button>
-      <button class="btn-next" id="pay-btn" onclick="handlePayment()">Pay $5 & Submit</button>
+      <button class="btn-next" id="pay-btn" onclick="handlePayment()">Pay $5 & Submit Audit</button>
     </div>
   </div>
 
@@ -748,7 +748,7 @@
     <div class="success-wrap">
       <div class="success-icon">✦</div>
       <h2>You're In.</h2>
-      <p>Your form has been submitted. River will review your answers and send your personal goal plan to your email within 48 hours.</p>
+      <p>Your audit has been submitted. River will review your answers and send your personal goal plan to your email within 48 hours.</p>
       <p style="font-size: 13px; color: var(--text-dim);">Check your spam if you don't see it.</p>
       <a href="#" class="discord-btn">Join the Noble Order Discord →</a>
     </div>
@@ -758,7 +758,7 @@
 
 <script>
   // ─── CONFIG ───────────────────────────────────────────────
-  const STRIPE_KEY = 'pk_live_51TO5drRAPyMq50I2VeTnOB541iq9q1t0YAJLGZYjQWDGsLhNkS0ItQ1s1zS2Hkn8vUyPSh4Dbhs0wu7INBYjKtCS00I3sWZoGq'; // Replace with your Stripe publishable key
+  const STRIPE_KEY = 'pk_test_YOUR_KEY_HERE'; // Replace with your Stripe publishable key
   const PRICE_CENTS = 500; // $5.00
   const YOUR_EMAIL = 'rivernobleorder@gmail.com'; // Replace with your email to receive submissions
   // ──────────────────────────────────────────────────────────
@@ -766,7 +766,7 @@
   let stripe, cardElement, formData = {};
 
   function initStripe() {
-    if (STRIPE_KEY === 'pk_live_51TO5drRAPyMq50I2VeTnOB541iq9q1t0YAJLGZYjQWDGsLhNkS0ItQ1s1zS2Hkn8vUyPSh4Dbhs0wu7INBYjKtCS00I3sWZoGq') return;
+    if (STRIPE_KEY === 'pk_test_YOUR_KEY_HERE') return;
     if (window.Stripe) { mountStripe(); return; }
     const s = document.createElement('script');
     s.src = 'https://js.stripe.com/v3/';
@@ -818,7 +818,6 @@
       formData.priority = document.getElementById('priority').value;
       formData.tried = document.getElementById('tried').value;
       formData.seriousness = document.querySelector('#serious-scale .selected')?.textContent || 'not answered';
-      initStripe();
     }
 
     showSection(current + 1);
@@ -857,7 +856,7 @@
     // Save form data to sessionStorage so we can retrieve it after payment
     sessionStorage.setItem('nobleOrderAudit', JSON.stringify(formData));
     // Redirect to Stripe Payment Link
-    window.location.href = 'https://buy.stripe.com/7sY6oJ1Pmh0Q0xB5ZE2go00';
+    window.location.href = 'https://buy.stripe.com/test_9B65kD25A32Sgs13m13oA00';
   }
 </script>
 </body>
